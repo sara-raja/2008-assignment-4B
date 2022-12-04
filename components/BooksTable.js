@@ -7,7 +7,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
+import Button from '@mui/material/Button';
+
+import { useRouter } from 'next/router'
+
 export default function BooksTable(props) {
+  const router = useRouter()
+
+  const navigateToBookDetails = () => {
+    router.push(`/book/${props.id}`)
+  }
     return <TableContainer component={Paper}>
     <Table>
       <TableHead>
@@ -17,12 +26,20 @@ export default function BooksTable(props) {
       </TableHead>
       <TableBody>
         {props.books.map((book,index)=> {
+          // console.log(book.key)
             return <TableRow
               key={index}
+              id={book.key}
             >
                <TableCell>
                   {book.title}
               </TableCell>
+              <TableCell>
+                <Button onClick={navigateToBookDetails}>
+                  Details
+                </Button>
+              </TableCell>
+              
             </TableRow>
           })}
       </TableBody>
