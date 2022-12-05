@@ -15,14 +15,13 @@ export default function Book(){
 	const { id } = router.query
 
     useEffect(()=>{
+        if(!id){
+            return
+        }
         getBookDetails(id).then((data)=>{
-            console.log("First")
             console.log(data)
 
             setBookDetails(data)
-            
-            console.log("Second")
-            console.log(data)
         })
     }, [id])
 
