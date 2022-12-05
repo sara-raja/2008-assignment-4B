@@ -14,8 +14,11 @@ import { useRouter } from 'next/router'
 export default function BooksTable(props) {
   const router = useRouter()
 
-  const navigateToBookDetails = () => {
-    router.push(`/book/${props.id}`)
+  const navigateToBookDetails = (id) => {
+    const idCorrected = id.replace('/works/', '')
+    router.push(`/book/${idCorrected}`)
+    // console.log(id)
+    // console.log(idCorrected)
   }
     return <TableContainer component={Paper}>
     <Table>
@@ -26,16 +29,15 @@ export default function BooksTable(props) {
       </TableHead>
       <TableBody>
         {props.books.map((book,index)=> {
-          // console.log(book.key)
+          // console.log(book)
             return <TableRow
               key={index}
-              id={book.key}
             >
                <TableCell>
                   {book.title}
               </TableCell>
               <TableCell>
-                <Button onClick={navigateToBookDetails}>
+                <Button onClick={()=>navigateToBookDetails(book.key)}>
                   Details
                 </Button>
               </TableCell>

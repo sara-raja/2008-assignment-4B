@@ -27,7 +27,7 @@ export default function Home() {
 
   useEffect(()=> {
     getAuthorWorks(authorKey).then((data)=> {
-      console.log(data)
+      // console.log(data)
       setAuthorWorks(data)
     })
   }, [authorKey])
