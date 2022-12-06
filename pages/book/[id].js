@@ -1,9 +1,12 @@
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 import LoadingCircle from '../../components/LoadingCircle';
 import Navbar from "../../components/Navbar";
+
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { getBookDetails } from '../../utils/api/books';
@@ -20,7 +23,6 @@ export default function Book(){
         }
         getBookDetails(id).then((data)=>{
             console.log(data)
-
             setBookDetails(data)
         })
     }, [id])
@@ -31,14 +33,30 @@ export default function Book(){
         <LoadingCircle/>
     :
         <Container>
-            <Grid item xs="10">
+            <Grid item xs="12">
                 <Typography variant="h3" gutterBottom>
                 {`${bookDetails.title}`}
                 </Typography>
                 <Typography variant="h5">Covers</Typography>
             </Grid>
-            <Grid item xs="4">
-                cycle through covers here..
+            <Grid>
+                {!bookDetails.covers?
+                <Typography variant='p'>
+                    No book covers
+                </Typography>
+                :
+                // console.log(bookDetails.covers)
+                <ImageList cols={3}>
+                    {bookDetails.covers.map((coverId)=>( 
+                    <ImageListItem key={coverId.img}>
+                    <img
+                      src={`https://covers.openlibrary.org/b/id/${coverId}-L.jpg`}
+                      loading="lazy"
+                    />
+                  </ImageListItem>
+                ))}
+              </ImageList>
+                }
             </Grid>
         </Container>  
     }
