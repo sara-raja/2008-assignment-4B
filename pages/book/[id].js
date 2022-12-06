@@ -53,6 +53,7 @@ export default function Book(){
                     <ImageListItem key={coverId.img}>
                     <img
                       src={`https://covers.openlibrary.org/b/id/${coverId}-L.jpg`}
+                      alt={bookDetails.title}
                       loading="lazy"
                     />
                   </ImageListItem>
