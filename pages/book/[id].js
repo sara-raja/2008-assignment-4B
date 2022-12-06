@@ -30,18 +30,20 @@ export default function Book(){
     return <>
     <Navbar/>
     {!bookDetails?
-        <LoadingCircle/>
+        <LoadingCircle
+        loadingDescription="Book data"
+        />
     :
         <Container>
             <Grid item xs="12">
-                <Typography variant="h3" gutterBottom>
+                <Typography variant="h3" gutterBottom align="center">
                 {`${bookDetails.title}`}
                 </Typography>
-                <Typography variant="h5">Covers</Typography>
+                <Typography variant="h5" align="center" gutterBottom>Covers</Typography>
             </Grid>
             <Grid>
                 {!bookDetails.covers?
-                <Typography variant='p'>
+                <Typography variant='body1' align="center">
                     No book covers
                 </Typography>
                 :
